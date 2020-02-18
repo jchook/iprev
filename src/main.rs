@@ -21,7 +21,6 @@ fn ip6_reverse(ip: &Ipv6Addr) -> String {
     let mut rev = String::with_capacity(64);
     for oct in ip.octets().iter().rev() {
         rev.push_str(format!("{:x}.", oct & 0x0fu8).as_str());
-        // Rust gets mad about right-shifting set bits, so we need to mask + shift
         rev.push_str(format!("{:x}.", (oct & 0xf0u8) >> 4u8).as_str());
     }
     rev
